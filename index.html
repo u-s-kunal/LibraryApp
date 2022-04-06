@@ -5,94 +5,113 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Library</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <title>Library</title>
 </head>
 
+
+
 <body>
-    <h1>Books Library</h1>
-    <div id="alertSMS" >
-      
-    </div>
-
-    <div class="container my-5 p-4">
-        <form id="book-form">
-            <div class="mb-3 mx-4">
-                <label for="exampleInputEmail1" class="form-label">Book Title:-</label>
-                <input type="text" class="form-control" id="bookName" required>
-
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-3 ">Books Library</a>
+            <form class="d-flex">
+                <input class="form-control me-3 search " type="search" id="searchTxt" placeholder="Find your Book..."
+                    aria-label="Search">
+                <button class="btn btn-danger " type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div id="alertSMS" class="">
+        <!-- <div class="alert alert-success " role="alert">
+     
+            <p class="text-align-center">The Book is added<b>---Succsessfully..!!!</b></p>
+         </div>; -->
+    <div>
+        <form id="mainForm" class="my-5 mx-5">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Book Title :</label>
+                <div class="col-sm-10">
+                    <input id="bookTitle" type="text" class="form-control" name="title">
+                </div>
             </div>
-            <div class="mb-3 mx-4">
-                <label for="author" class="form-label">Author Name:-</label>
-                <input type="text" class="form-control" id="authorName" required>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Author :</label>
+                <div class="col-sm-10">
+                    <input id="bookAuthor" type="text" class="form-control">
+                </div>
             </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="Non-fiction" value="Non-fiction"
-                    checked>
-                <label class="form-check-label" for="exampleRadios1">
-                    Non-fiction
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="Sci-Fi" value="Sci-Fi">
-                <label class="form-check-label" for="exampleRadios2">
-                    Sci-Fi
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="Biography" value="Biography">
-                <label class="form-check-label" for="exampleRadios2">
-                    Biography
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="Fiction" value="Fiction">
-                <label class="form-check-label" for="exampleRadios2">
-                    Fiction
-                </label>
-            </div>
-            <input type="submit" class="btn btn-primary m-4" value="Add Book"></input>
+            <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-2 pt-0">type </legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="SelfHelp" value="Self-Help"
+                            checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            Self-Help
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="Education" value="Education">
+                        <label class="form-check-label" for="gridRadios2">
+                            Education
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="Fiction" value="Fiction">
+                        <label class="form-check-label" for="gridRadios3">
+                            Fiction
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="NonFiction" value="Non-Fiction">
+                        <label class="form-check-label" for="gridRadios3">
+                            Non-Fiction
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="Religious" value="Religious">
+                        <label class="form-check-label" for="gridRadios3">
+                            Religious
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="History" value="History">
+                        <label class="form-check-label" for="gridRadios3">
+                            History
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <input id="addBook" type="submit" class="btn btn-primary" value="Add Book">
         </form>
-
-        <!-- book display table  -->
-        <table class="table table-dark table-striped ">
-
-            <thead>
-                <tr>
-                    <th scope="col">Book Title</th>
-                    <th scope="col">Author Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Delete</th>
-                </tr>
-            </thead>
-            <tbody id="book-list"> <tr>
-
-            </tr>
-            </tbody>
-
-        </table>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <script src="library.js"></script>
+        <div class="container">
+            <div class="bookTable">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+            </div>
+        </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+<script src="index.js"></script>
 
 </html>
