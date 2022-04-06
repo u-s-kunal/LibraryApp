@@ -1,146 +1,196 @@
-console.log('Books Library')
-
-class Book {
-    constructor(name, author, type) {
-        this.name = name;
-        this.author = author;
-        this.type = type;
-    };
-};
-
-//displaying book inside the table UI
-
-class Display {
-
-  
-    
-    add(book) {
-        console.log('adding a new book');
-        // let books = localStorage.getItem("books")
-
-        let tableBody = document.getElementById('book-list');
-        let UIstring = ` <tr>
-        <td>${book.name}</td>
-        <td>${book.author}</td>
-        <td>${book.type}</td>
-        <td><input id="btnConfirm" type="button" class="btn btn-danger delete" value="X"></input></td>
-    </tr>`
-        tableBody.innerHTML += UIstring;
-    }
-
-    //for deleting the book list
-    static deleteBook(el) {
-        if (el.classList.contains("delete")) {
-            el.parentElement.parentElement.remove();
-        }
-    }
-
-    // functions will be added here  
-
-    //clear the form after submission of new book
-    clear() {
-        let libraryForm = document.getElementById('book-form');
-        libraryForm.reset();
-
-    }
-
-    show() {
-        let alertSMS = document.getElementById('alertSMS');
-
-        alertSMS.innerHTML = ` <div class="alert alert-success " role="alert">
-       
-        <p class="text-align-center">The Book is added<b>---Succsessfully..!!!</b></p>
-    </div>`;
-        setTimeout(function () {
-            alertSMS.innerHTML = ''
-        }, 2000);
-
-    }
-    
+// console.log("This is index")
+showBooks()
 
 
-}
+// formValidation();
 
 
 
-//add event listner to form//
 
-let libraryForm = document.getElementById('book-form');
-libraryForm.addEventListener('submit', libraryFormSubmit);
 
-function libraryFormSubmit(e) {
-    console.log('you have submitted library form');
 
-    let name = document.getElementById('bookName').value;
-    let author = document.getElementById('authorName').value;
+
+//If user adds a book at it to the local storsage.
+
+
+let addBook = document.getElementById("addBook");
+
+
+addBook.addEventListener("click", function (e) {
+    let bookTitle = document.getElementById("bookTitle");
+    let bookAuthor = document.getElementById("bookAuthor");
+    let alertSMS = document.getElementById('alertSMS');
+
     let type;
-    let nonFiction = document.getElementById('Non-fiction');
-    let sciFi = document.getElementById('Sci-Fi');
-    let Biography = document.getElementById('Biography');
-    let Fiction = document.getElementById('Fiction');
 
-    if (nonFiction.checked) {
-        type = nonFiction.value;
+
+    //validate
+    if (!bookTitle.value) {
+        alert('Fill the Input Title');
+        bookTitle.focus();
+        return false;
+    };
+  
+    let SelfHelp = document.getElementById("SelfHelp");
+    let Education = document.getElementById("Education");
+    let Fiction = document.getElementById("Fiction");
+    let NonFiction = document.getElementById("NonFiction");
+    let Religious = document.getElementById("Religious");
+    let History = document.getElementById("History");
+
+    if (SelfHelp.checked) {
+        type = SelfHelp;
     }
-    else if (sciFi.checked) {
-        type = sciFi.value;
-    }
-    else if (Biography.checked) {
-        type = Biography.value;
+
+    else if (Education.checked) {
+        type = Education;
     }
     else if (Fiction.checked) {
-        type = Fiction.value;
+        type = Fiction;
+    }
+    else if (NonFiction.checked) {
+        type = NonFiction;
+    }
+    else if (Religious.checked) {
+        type = Religious;
+    }
+    else if (History.checked) {
+        type = History;
+    };
+
+
+    let books = localStorage.getItem("books");
+    if (books == null) {
+        booksObj = [];
+    }
+    else {
+        booksObj = JSON.parse(books);
+    }
+
+    let myObj = {
+        Title: bookTitle.value,
+        Author: bookAuthor.value,
+        Category: type.value,
+    }
+    booksObj.push(myObj);
+
+    
+
+
+
+    localStorage.setItem('books', JSON.stringify(booksObj));
+    bookTitle.value = "";
+    bookAuthor.value = "";
+    type.value = "";
+    // console.log(booksObj);
+
+
+
+
+    // e.preventDefault();
+
+
+
+
+
+
+
+});
+
+//show book function
+
+function showBooks() {
+    let books = localStorage.getItem("books");
+
+    if (books == null) {
+
+        booksObj = [];
+    } else {
+        booksObj = JSON.parse(books);
+    }
+    let html = "";
+
+    booksObj.forEach(function (Element, index) {
+        html +=
+            `<tr class=" bookShelf table table-dark table-striped">
+            <th scope="col">${index + 1}</th>
+            <td>${Element.Title}</td>
+            <td>${Element.Author}</td>
+            <td>${Element.Category}</td>
+            <td><button id="${index} "onClick="deleteBooks(this.id)" id = "closeBtn" type="button" class="btn-close" aria-label="Close"></button></td>
+        </tr>`
+    });
+
+    let booksElm = document.getElementById("tableBody");
+
+    if (booksObj.lenght !== 0) {
+        booksElm.innerHTML = html;
+
     }
 
 
-    let book = new Book(name, author, type);
+};
+
+// Alert function
 
 
-    name.value = "";
-    author.value = "";
-    type.value = "";
+function show() {
+    let alertSMS = document.getElementById('alertSMS');
 
-    console.log(book);
+    alertSMS.innerHTML = ` <div class="alert alert-success " role="alert">
+   
+    <p class="text-align-center">The Book is added<b>---Succsessfully..!!!</b></p>
+</div>`;
+    setTimeout(function () {
+        alertSMS.innerHTML = ''
+    }, 2000);
 
-    let display = new Display();
-    display.add(book);
-    display.clear();
-    display.show();
-    e.preventDefault();
-    // display.addBooks(book);
+};
+
+
+
+
+// Function To delete books
+
+function deleteBooks(index) {
+
+    let books = localStorage.getItem("books");
+    if (books == null) {
+        booksObj = [];
+
+    } else {
+        booksObj = JSON.parse(books);
+    }
+
+    booksObj.splice(index, 1);
+    localStorage.setItem("books", JSON.stringify(booksObj));
+    showBooks();
+
 }
 
-//Event to Delete book
-
-    document.getElementById('book-list').addEventListener('click', (e) => {
-        Display.deleteBook(e.target);
-    })
 
 
-    // store the books to local storage
-class store{
-    
-    static getBooks() {
-        let books;
-        if (localStorage.getItem('books') === null) {
-            books = [];
+// function for search a book
+
+let search = document.getElementById("searchTxt");
+search.addEventListener("input", function () {
+
+    let inputVal = search.value.toLowerCase();
+
+    // console.log("input event fired", inputVal)
+    let bookShelf = document.getElementsByClassName('bookShelf')
+
+    Array.from(bookShelf).forEach(function (element) {
+        let bookName = element.getElementsByTagName("td")[0].innerText;
+
+        if (bookName.includes(inputVal)) {
+            element.style.display = "";
         } else {
-            books = JSON.parse(localStorage.getItem("books"));
+            element.style.display = "none";
+
         }
-        return books;
-    };
-
-    static addBook(book) {
-        const books = store.getBooks();
-        books.push(book);
-        localStorage.setItem("books", JSON.stringify(books));
-        
-    };
-
-
-
-    }
-
+    })
+});
 
 
 
