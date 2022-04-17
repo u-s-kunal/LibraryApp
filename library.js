@@ -2,14 +2,6 @@
 showBooks()
 
 
-// formValidation();
-
-
-
-
-
-
-
 //If user adds a book at it to the local storsage.
 
 
@@ -19,18 +11,16 @@ let addBook = document.getElementById("addBook");
 addBook.addEventListener("click", function (e) {
     let bookTitle = document.getElementById("bookTitle");
     let bookAuthor = document.getElementById("bookAuthor");
-    let alertSMS = document.getElementById('alertSMS');
 
     let type;
 
-
     //validate
-    if (!bookTitle.value) {
-        alert('Fill the Input Title');
+    if (bookTitle.value < 1 || bookAuthor.value < 1) {
+        alert("Books Title or Author's Name is Missing..!!");
         bookTitle.focus();
         return false;
     };
-  
+
     let SelfHelp = document.getElementById("SelfHelp");
     let Education = document.getElementById("Education");
     let Fiction = document.getElementById("Fiction");
@@ -74,32 +64,33 @@ addBook.addEventListener("click", function (e) {
     }
     booksObj.push(myObj);
 
-    
-
-
-
     localStorage.setItem('books', JSON.stringify(booksObj));
     bookTitle.value = "";
     bookAuthor.value = "";
     type.value = "";
-    // console.log(booksObj);
 
 
 
+    if (bookTitle.value !== false || bookAuthor.value != false) {
 
-    // e.preventDefault();
+      document.getElementById('alertSMS').innerHTML = ` <span class="alert alert-success " role="alert">
+                <p class="text-align-center">Your Book is added<b>---Succsessfully..!!!</b></p>
+                </span>`;
+        setTimeout(function () {
+            
+            location.reload();
 
+        }, 600);
+    }
+    e.preventDefault();
 
-
-
-
-
-
+   
 });
 
 //show book function
 
 function showBooks() {
+
     let books = localStorage.getItem("books");
 
     if (books == null) {
@@ -114,10 +105,10 @@ function showBooks() {
         html +=
             `<tr class=" bookShelf table table-dark table-striped">
             <th scope="col">${index + 1}</th>
-            <td>${Element.Title}</td>
-            <td>${Element.Author}</td>
-            <td>${Element.Category}</td>
-            <td><button id="${index} "onClick="deleteBooks(this.id)" id = "closeBtn" type="button" class="btn-close" aria-label="Close"></button></td>
+            <th>${Element.Title}</th>
+            <th>${Element.Author}</th>
+            <th>${Element.Category}</th>
+            <th><button id="${index} "onClick="deleteBooks(this.id)" id = "closeBtn" type="button" class="btn-close" aria-label="Close"></button></th>
         </tr>`
     });
 
@@ -128,26 +119,24 @@ function showBooks() {
 
     }
 
-
 };
 
-// Alert function
+////Alert function
+// function alertSMS() {
+//     if (bookTitle.value ==true) {
 
+//         let alertSMS = document.getElementById('alertSMS');
 
-function show() {
-    let alertSMS = document.getElementById('alertSMS');
+//         alertSMS.innerHTML = ` <span class="alert alert-success " role="alert">
 
-    alertSMS.innerHTML = ` <div class="alert alert-success " role="alert">
-   
-    <p class="text-align-center">The Book is added<b>---Succsessfully..!!!</b></p>
-</div>`;
-    setTimeout(function () {
-        alertSMS.innerHTML = ''
-    }, 2000);
-
-};
-
-
+//         <p class="text-align-center">The Book is added<b>---Succsessfully..!!!</b></p>
+//         </span>`;
+//         setTimeout(function () {
+//             alertSMS.innerHTML = '';
+//         }, 3000);
+//     }
+//     showBooks();
+// };
 
 
 // Function To delete books
@@ -160,6 +149,7 @@ function deleteBooks(index) {
 
     } else {
         booksObj = JSON.parse(books);
+
     }
 
     booksObj.splice(index, 1);
@@ -191,7 +181,4 @@ search.addEventListener("input", function () {
         }
     })
 });
-
-
-
 
