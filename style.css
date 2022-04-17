@@ -13,9 +13,17 @@ width: 100%;
 }
 
 body{
+    background-image: url(blue-wall-empty-room-with-concrete-floor.jpeg);
+    background-size: cover;
+    color: #ffffff;
+    font-size: 1.3vw;
+    height: 100vh;
 
-    background-color: #c0c0c0;
 }
+.table-responsive{
+    max-height: 200px;
+}
+
 
 .form-control{
     border: 1px solid;
@@ -23,18 +31,19 @@ body{
 
 #addBook{
     margin-left: 215px;
-    margin-top: 50px;
 }
 
-#alertSMS{
-    position: absolute;
-    width: 100vw;
-    /* text-align: center; */
-    height: 2vw;
 
-}
 .alert{
-    height: 4vw;
+    position: absolute;
+    height: 10vw;
+    width: 60vw;
+    margin-top: 250px;
+    left: 20%;
+    font-size: 3vw ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -68,5 +77,3 @@ body{
     .search{
         width: 300px;
     }
-
-    
