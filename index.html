@@ -24,16 +24,16 @@
             <a class="navbar-brand mx-3 ">Books Library</a>
             <form class="d-flex">
                 <input class="form-control me-3 search " type="search" id="searchTxt" placeholder="Find your Book..."
-                    aria-label="Search">
+                    aria-A="Search">
                 <button class="btn btn-danger " type="submit">Search</button>
             </form>
         </div>
     </nav>
     <div id="alertSMS" class="">
-        <!-- <div class="alert alert-success " role="alert">
+        <!-- <span class="alert alert-success " role="alert">
      
             <p class="text-align-center">The Book is added<b>---Succsessfully..!!!</b></p>
-         </div>; -->
+         </span>; -->
     <div>
         <form id="mainForm" class="my-5 mx-5">
             <div class="row mb-3">
@@ -92,10 +92,10 @@
             </fieldset>
             <input id="addBook" type="submit" class="btn btn-primary" value="Add Book">
         </form>
-        <div class="container">
-            <div class="bookTable">
-                <table class="table table-dark table-striped">
-                    <thead>
+        <div class="container container-fluid">
+            <div class="bookTable table-responsive">
+                <table class="table table-dark table-striped mb-0  ">
+                    <thead class="head">
                         <tr>
                             <th scope="col">No.</th>
                             <th scope="col">Title</th>
@@ -104,7 +104,12 @@
                             <th scope="col">Delete</th>
                         </tr>
                     </thead>
-                    <tbody id="tableBody">
+                </table>
+            </div>
+            <div class="bookTable table-responsive">
+                <table class="table table-dark table-striped table-hover ">
+                    <tbody id="tableBody" ></tbody>
+                </table>
             </div>
         </div>
 
@@ -112,6 +117,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
     crossorigin="anonymous"></script>
-<script src="library.js"></script>
+<script src="logic.js"></script>
 
 </html>
